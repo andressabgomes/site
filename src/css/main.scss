@@ -1,0 +1,20 @@
+// ===================================
+// CAJÁ - ARQUIVO PRINCIPAL SCSS
+// ===================================
+
+// Base
+@import "base/variables";
+@import "base/base";
+
+// Componentes
+@import "components/components";
+@import "components/video-styles";
+
+// Animações
+@import "animations/ux-libraries";
+
+// Arquivos externos (se existirem)
+// @import "../../public/fix-layout.css";
+// @import "../../public/colabs-inspired.css";
+// @import "../../public/firefox-theme.css";
+// @import "../../public/style.css";

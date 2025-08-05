@@ -4,12 +4,13 @@
  * Para animações suaves de vídeos e textos conforme scroll
  */
 
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { TextPlugin } from 'gsap/TextPlugin';
-import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin';
-import Lenis from '@studio-freight/lenis';
-import * as THREE from 'three';
+// Usar imports externos para bibliotecas CDN
+// import { gsap } from 'gsap';
+// import { ScrollTrigger } from 'gsap/ScrollTrigger';
+// import { TextPlugin } from 'gsap/TextPlugin';
+// import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin';
+// import Lenis from '@studio-freight/lenis';
+// import * as THREE from 'three';
 
 // Registra plugins GSAP
 gsap.registerPlugin(ScrollTrigger, TextPlugin, MorphSVGPlugin);
@@ -23,7 +24,7 @@ class AnimationManager {
         this.animations = new Map();
         this.isInitialized = false;
         this.performanceMode = this.detectPerformanceMode();
-        
+
         this.init();
     }
 
@@ -34,7 +35,7 @@ class AnimationManager {
         const isMobile = window.innerWidth < 768;
         const isLowEnd = navigator.hardwareConcurrency < 4;
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        
+
         return {
             isMobile,
             isLowEnd,
@@ -121,8 +122,8 @@ class AnimationManager {
         // Configura cena Three.js
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        this.renderer = new THREE.WebGLRenderer({ 
-            alpha: true, 
+        this.renderer = new THREE.WebGLRenderer({
+            alpha: true,
             antialias: true,
             powerPreference: 'high-performance'
         });
@@ -195,9 +196,9 @@ class AnimationManager {
         // Animação do título principal
         const heroTitle = document.querySelector('.hero-title');
         if (heroTitle) {
-            gsap.fromTo(heroTitle, 
-                { 
-                    y: 100, 
+            gsap.fromTo(heroTitle,
+                {
+                    y: 100,
                     opacity: 0,
                     rotationX: 15
                 },
@@ -216,9 +217,9 @@ class AnimationManager {
         const heroDescription = document.querySelector('.hero-description');
         if (heroDescription) {
             gsap.fromTo(heroDescription,
-                { 
-                    y: 50, 
-                    opacity: 0 
+                {
+                    y: 50,
+                    opacity: 0
                 },
                 {
                     y: 0,
@@ -234,8 +235,8 @@ class AnimationManager {
         const heroCTA = document.querySelector('.hero-cta');
         if (heroCTA) {
             gsap.fromTo(heroCTA,
-                { 
-                    y: 30, 
+                {
+                    y: 30,
                     opacity: 0,
                     scale: 0.9
                 },
@@ -259,10 +260,10 @@ class AnimationManager {
      */
     animateParticles() {
         const particles = document.querySelectorAll('.particle');
-        
+
         particles.forEach((particle, index) => {
             const speed = parseFloat(particle.dataset.speed) || 1;
-            
+
             gsap.to(particle, {
                 y: '-100vh',
                 x: `random(-50, 50)`,
@@ -286,9 +287,9 @@ class AnimationManager {
         const heroVideo = document.querySelector('.hero-video');
         if (heroVideo) {
             gsap.fromTo(heroVideo,
-                { 
+                {
                     scale: 1.1,
-                    opacity: 0 
+                    opacity: 0
                 },
                 {
                     scale: 1,
@@ -315,12 +316,12 @@ class AnimationManager {
         const gridVideos = document.querySelectorAll('.video-grid-item');
         gridVideos.forEach((item, index) => {
             const video = item.querySelector('video');
-            
+
             if (video) {
                 // Animação de entrada
                 gsap.fromTo(item,
-                    { 
-                        y: 100, 
+                    {
+                        y: 100,
                         opacity: 0,
                         scale: 0.8
                     },
@@ -367,9 +368,9 @@ class AnimationManager {
         const sectionTitles = document.querySelectorAll('.section-title');
         sectionTitles.forEach(title => {
             gsap.fromTo(title,
-                { 
-                    y: 50, 
-                    opacity: 0 
+                {
+                    y: 50,
+                    opacity: 0
                 },
                 {
                     y: 0,
@@ -390,9 +391,9 @@ class AnimationManager {
         const sectionDescriptions = document.querySelectorAll('.section-description');
         sectionDescriptions.forEach(desc => {
             gsap.fromTo(desc,
-                { 
-                    y: 30, 
-                    opacity: 0 
+                {
+                    y: 30,
+                    opacity: 0
                 },
                 {
                     y: 0,
@@ -413,8 +414,8 @@ class AnimationManager {
         const serviceCards = document.querySelectorAll('.service-card');
         serviceCards.forEach((card, index) => {
             gsap.fromTo(card,
-                { 
-                    y: 60, 
+                {
+                    y: 60,
                     opacity: 0,
                     rotationY: 15
                 },
@@ -444,7 +445,7 @@ class AnimationManager {
         const parallaxElements = document.querySelectorAll('[data-parallax]');
         parallaxElements.forEach(element => {
             const speed = parseFloat(element.dataset.parallax) || 0.5;
-            
+
             gsap.to(element, {
                 yPercent: -50 * speed,
                 ease: 'none',
@@ -461,7 +462,7 @@ class AnimationManager {
         const parallaxImages = document.querySelectorAll('[data-parallax-image]');
         parallaxImages.forEach(image => {
             const speed = parseFloat(image.dataset.parallaxImage) || 0.3;
-            
+
             gsap.to(image, {
                 yPercent: -30 * speed,
                 scale: 1 + (speed * 0.1),
@@ -503,10 +504,10 @@ class AnimationManager {
         fadeElements.forEach(element => {
             const direction = element.dataset.fade || 'up';
             const distance = element.dataset.fadeDistance || 50;
-            
+
             let fromVars = { opacity: 0 };
             let toVars = { opacity: 1 };
-            
+
             switch (direction) {
                 case 'up':
                     fromVars.y = distance;
@@ -525,7 +526,7 @@ class AnimationManager {
                     toVars.x = 0;
                     break;
             }
-            
+
             gsap.fromTo(element, fromVars, {
                 ...toVars,
                 duration: 1,
@@ -548,7 +549,7 @@ class AnimationManager {
 
         // Cria partículas flutuantes
         this.createFloatingParticles();
-        
+
         // Cria efeito de ondas
         this.createWaveEffect();
     }
@@ -667,22 +668,22 @@ class AnimationManager {
     destroy() {
         // Limpa ScrollTrigger
         ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-        
+
         // Para Lenis
         if (this.lenis) {
             this.lenis.destroy();
         }
-        
+
         // Limpa Three.js
         if (this.renderer) {
             this.renderer.dispose();
             this.renderer.domElement.remove();
         }
-        
+
         // Limpa animações customizadas
         this.animations.forEach(anim => anim.animation.kill());
         this.animations.clear();
-        
+
         console.log('🧹 AnimationManager destruído');
     }
 }
@@ -693,4 +694,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Exporta para uso em módulos
-export default AnimationManager; 
+export default AnimationManager;

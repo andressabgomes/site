@@ -6,21 +6,8 @@
 import AOS from 'aos';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Swiper, Navigation, Pagination, Autoplay } from 'swiper';
-import {
-    ArrowRight,
-    ArrowLeft,
-    ChevronDown,
-    ChevronUp,
-    Mail,
-    Phone,
-    MessageCircle,
-    Zap,
-    Code,
-    Users,
-    Home,
-    Settings
-} from 'lucide';
+// Removido import do Swiper - usar CDN
+// Removido import do lucide - usar ícones SVG inline
 
 // Registrar plugins do GSAP
 gsap.registerPlugin(ScrollTrigger);
@@ -505,4 +492,4 @@ export {
 };
 
 // Auto-initialize
-initUXLibraries3D(); 
+initUXLibraries3D();

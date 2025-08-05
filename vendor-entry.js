@@ -1,0 +1,9 @@
+import 'node_modules/aos/dist/aos.js';
+import 'node_modules/gsap/dist/gsap.min.js';
+import 'node_modules/gsap/dist/ScrollTrigger.min.js';
+import 'node_modules/gsap/dist/TextPlugin.min.js';
+import 'node_modules/lenis/dist/lenis.min.js';
+import 'node_modules/swiper/swiper-bundle.min.js';
+import 'node_modules/jarallax/dist/jarallax.min.js';
+import 'node_modules/flickity/dist/flickity.pkgd.min.js';
+import 'node_modules/sweetalert2/dist/sweetalert2.min.js';

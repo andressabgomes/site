@@ -4,13 +4,13 @@
  */
 
 // Importar componentes
-import MobileMenu from '../../src/components/MobileMenu.js';
-import ContactForm from '../../src/components/ContactForm.js';
-import HelpChat from '../../src/components/HelpChat.js';
+import MobileMenu from '../../components/MobileMenu.js';
+import ContactForm from '../../components/ContactForm.js';
+import HelpChat from '../../components/HelpChat.js';
 
 // Importar utilitários
-import SmoothScroll from '../../src/utils/SmoothScroll.js';
-import ScrollManager from '../../src/utils/ScrollManager.js';
+import SmoothScroll from '../../utils/SmoothScroll.js';
+import ScrollManager from '../../utils/ScrollManager.js';
 
 /**
  * Classe principal da aplicação
@@ -21,7 +21,7 @@ class CajaApp {
         this.utils = {};
         this.init();
     }
-    
+
     init() {
         // Aguardar DOM estar pronto
         if (document.readyState === 'loading') {
@@ -30,7 +30,7 @@ class CajaApp {
             this.setupApp();
         }
     }
-    
+
     setupApp() {
         this.initializeComponents();
         this.initializeUtils();
@@ -38,23 +38,23 @@ class CajaApp {
         this.setupLazyLoading();
         this.setupPerformanceOptimizations();
     }
-    
+
     initializeComponents() {
         // Inicializar componentes
         this.components.mobileMenu = new MobileMenu();
         this.components.contactForm = new ContactForm();
         this.components.helpChat = new HelpChat();
     }
-    
+
     initializeUtils() {
         // Inicializar utilitários
         this.utils.smoothScroll = new SmoothScroll();
         this.utils.scrollManager = new ScrollManager();
-        
+
         // Configurar scroll to top
         this.setupScrollToTop();
     }
-    
+
     setupScrollToTop() {
         const scrollToTopBtn = document.getElementById('scrollToTopBtn');
         if (scrollToTopBtn) {
@@ -63,7 +63,7 @@ class CajaApp {
             });
         }
     }
-    
+
     setupStyles() {
         // Adicionar estilos dinâmicos
         const style = document.createElement('style');
@@ -72,7 +72,7 @@ class CajaApp {
                 opacity: 1 !important;
                 transform: translateY(0) !important;
             }
-            
+
             .loading-spinner {
                 width: 20px;
                 height: 20px;
@@ -81,19 +81,19 @@ class CajaApp {
                 border-radius: 50%;
                 animation: spin 1s linear infinite;
             }
-            
+
             @keyframes spin {
                 0% { transform: rotate(0deg); }
                 100% { transform: rotate(360deg); }
             }
-            
+
             .form-group input.error,
             .form-group textarea.error,
             .form-group select.error {
                 border-color: #ef4444 !important;
                 box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2) !important;
             }
-            
+
             /* Animações melhoradas */
             .service-card:hover,
             .benefit-card:hover,
@@ -101,12 +101,12 @@ class CajaApp {
                 transform: translateY(-8px) !important;
                 box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
             }
-            
+
             .btn-primary:hover,
             .btn-gold:hover {
                 transform: translateY(-3px) scale(1.02) !important;
             }
-            
+
             /* Melhor responsividade */
             @media (max-width: 768px) {
                 .service-card:hover,
@@ -118,11 +118,11 @@ class CajaApp {
         `;
         document.head.appendChild(style);
     }
-    
+
     setupLazyLoading() {
         // Configurar lazy loading para imagens
         const images = document.querySelectorAll('img[data-src]');
-        
+
         const imageObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -133,33 +133,33 @@ class CajaApp {
                 }
             });
         });
-        
+
         images.forEach(img => {
             imageObserver.observe(img);
         });
     }
-    
+
     setupPerformanceOptimizations() {
         // Preload critical resources
         const criticalLinks = document.querySelectorAll('a[href^="#"]');
         criticalLinks.forEach(link => {
             link.setAttribute('rel', 'prefetch');
         });
-        
+
         // Focus management para acessibilidade
         this.setupFocusManagement();
     }
-    
+
     setupFocusManagement() {
         const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
         const modal = document.getElementById('helpChatMenu');
-        
+
         if (modal) {
             modal.addEventListener('keydown', (e) => {
                 const focusableContent = modal.querySelectorAll(focusableElements);
                 const firstFocusableElement = focusableContent[0];
                 const lastFocusableElement = focusableContent[focusableContent.length - 1];
-                
+
                 if (e.key === 'Tab') {
                     if (e.shiftKey) {
                         if (document.activeElement === firstFocusableElement) {
@@ -182,4 +182,4 @@ class CajaApp {
 const app = new CajaApp();
 
 // Expor para uso global se necessário
-window.CajaApp = app; 
+window.CajaApp = app;

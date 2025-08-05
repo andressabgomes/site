@@ -11,11 +11,6 @@ body {
     overflow-x: hidden; /* Previne scroll horizontal */
 }
 
-/* Melhora performance do scroll */
-* {
-    -webkit-overflow-scrolling: touch; /* Scroll suave no iOS */
-}
-
 /* Otimizações para Lenis */
 .lenis {
     overflow: hidden;
@@ -84,17 +79,20 @@ body {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform, opacity;
+    contain: layout style paint;
+    backface-visibility: hidden;
+    transform: translateZ(0);
 }
 
 .optimized-video:hover {
-    transform: scale(1.02);
+    transform: scale(1.02) translateZ(0);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
 /* Estados do vídeo */
 .optimized-video.video-loaded {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateZ(0);
 }
 
 .optimized-video.video-playing {
@@ -109,10 +107,10 @@ body {
 /* Animação de pulse para vídeos ativos */
 @keyframes videoPulse {
     0%, 100% {
-        transform: scale(1);
+        transform: scale(1) translateZ(0);
     }
     50% {
-        transform: scale(1.01);
+        transform: scale(1.01) translateZ(0);
     }
 }
 
@@ -280,98 +278,12 @@ body {
 }
 
 @keyframes spin {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .video-background {
-        height: 60vh;
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
     }
-    
-    .video-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
     }
-    
-    .showcase-video {
-        margin: 1rem 0;
-    }
-    
-    .optimized-video {
-        border-radius: 6px;
-    }
-}
-
-@media (max-width: 480px) {
-    .video-background {
-        height: 50vh;
-    }
-    
-    .video-controls {
-        padding: 0.5rem;
-    }
-    
-    .video-controls button {
-        width: 32px;
-        height: 32px;
-    }
-}
-
-/* Modo escuro */
-@media (prefers-color-scheme: dark) {
-    .showcase-video {
-        background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
-    }
-    
-    .video-grid-item {
-        background: #2d3748;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    }
-    
-    .video-loading {
-        background: linear-gradient(90deg, #2d3748 25%, #4a5568 50%, #2d3748 75%);
-    }
-    
-    .video-loading::after {
-        border-color: #4a5568;
-        border-top-color: #63b3ed;
-    }
-}
-
-/* Acessibilidade */
-.optimized-video:focus {
-    outline: 2px solid #007bff;
-    outline-offset: 2px;
-}
-
-/* Redução de movimento */
-@media (prefers-reduced-motion: reduce) {
-    .optimized-video,
-    .showcase-video,
-    .video-grid-item {
-        transition: none;
-    }
-    
-    .optimized-video.video-playing {
-        animation: none;
-    }
-    
-    .video-loading {
-        animation: none;
-    }
-    
-    .video-loading::after {
-        animation: none;
-    }
-}
-
-/* Performance optimizations */
-.optimized-video {
-    contain: layout style paint;
-    backface-visibility: hidden;
-    transform: translateZ(0);
 }
 
 /* Fallback para navegadores que não suportam vídeo */
@@ -384,6 +296,7 @@ body {
     color: white;
     text-align: center;
     border-radius: 8px;
+    padding: 2rem;
 }
 
 .video-fallback::before {
@@ -391,4 +304,87 @@ body {
     font-size: 3rem;
     margin-bottom: 1rem;
     display: block;
-} 
+}
+
+/* Acessibilidade */
+.optimized-video:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .video-background {
+        height: 60vh;
+    }
+
+    .video-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .showcase-video {
+        margin: 1rem 0;
+    }
+
+    .optimized-video {
+        border-radius: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-background {
+        height: 50vh;
+    }
+
+    .video-controls {
+        padding: 0.5rem;
+    }
+
+    .video-controls button {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* Modo escuro */
+@media (prefers-color-scheme: dark) {
+    .showcase-video {
+        background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+    }
+
+    .video-grid-item {
+        background: #2d3748;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .video-loading {
+        background: linear-gradient(90deg, #2d3748 25%, #4a5568 50%, #2d3748 75%);
+    }
+
+    .video-loading::after {
+        border-color: #4a5568;
+        border-top-color: #63b3ed;
+    }
+}
+
+/* Redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+    .optimized-video,
+    .showcase-video,
+    .video-grid-item {
+        transition: none;
+    }
+
+    .optimized-video.video-playing {
+        animation: none;
+    }
+
+    .video-loading {
+        animation: none;
+    }
+
+    .video-loading::after {
+        animation: none;
+    }
+}

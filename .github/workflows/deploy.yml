@@ -1,0 +1,89 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        
+    - name: Validate files
+      run: |
+        echo "Validating project structure..."
+        if [ ! -f "index.html" ]; then
+          echo "❌ index.html not found"
+          exit 1
+        fi
+        if [ ! -f "style.css" ]; then
+          echo "❌ style.css not found"
+          exit 1
+        fi
+        if [ ! -f "script.js" ]; then
+          echo "❌ script.js not found"
+          exit 1
+        fi
+        if [ ! -f "contact.php" ]; then
+          echo "❌ contact.php not found"
+          exit 1
+        fi
+        echo "✅ All required files found"
+        
+    - name: Create deployment package
+      run: |
+        echo "📦 Creating deployment package..."
+        mkdir -p deploy
+        cp index.html deploy/
+        cp style.css deploy/
+        cp script.js deploy/
+        cp contact.php deploy/
+        cp -r config deploy/
+        cp -r admin deploy/ 2>/dev/null || echo "Admin directory not found"
+        cp database_setup.sql deploy/
+        
+        # Remove development files
+        rm -f deploy/config/database_local.php
+        rm -f deploy/contact_local.php
+        
+        echo "✅ Deployment package created"
+        
+    - name: Deploy to Hostinger (FTP)
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./deploy/
+        server-dir: ./public_html/
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          **/README.md
+          **/.gitignore
+          **/deploy.sh
+          **/hostinger-deploy.md
+          **/local_contacts.json
+          **/contact_log.txt
+          
+    - name: Deploy success notification
+      run: |
+        echo "🎉 Deploy completed successfully!"
+        echo "🌐 Site should be live at: https://cajait.com"
+        
+    - name: Notify on failure
+      if: failure()
+      run: |
+        echo "❌ Deploy failed!"
+        echo "Please check the logs above for errors." 

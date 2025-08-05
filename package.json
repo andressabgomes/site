@@ -1,0 +1,66 @@
+{
+  "name": "cajait-dev",
+  "version": "2.0.0",
+  "description": "Cajá IT - Plataforma de desenvolvimento e inovação tecnológica",
+  "main": "public/index.html",
+  "scripts": {
+    "dev": "php -S localhost:3000 -t public/",
+    "dev:8000": "php -S localhost:8000 -t public/",
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "sass src/css:public/css --style compressed",
+    "build:js": "esbuild src/js/main.js --bundle --minify --outfile=public/js/bundle.js",
+    "build:prod": "npm run build && npm run optimize",
+    "optimize": "imagemin src/images/* --out-dir=public/images",
+    "test": "echo \"No tests specified\" && exit 0",
+    "lint": "eslint src/js/",
+    "lint:css": "stylelint src/css/",
+    "clean": "rm -rf public/css public/js public/images dist",
+    "serve": "npm run build && npm run dev",
+    "start": "npm run dev",
+    "watch": "npm run build:css -- --watch & npm run build:js -- --watch",
+    "analyze": "npm run build && npx webpack-bundle-analyzer dist/stats.json"
+  },
+  "keywords": [
+    "cajait",
+    "desenvolvimento",
+    "tecnologia",
+    "inovação",
+    "software",
+    "web",
+    "mobile"
+  ],
+  "author": "Cajá IT Team",
+  "license": "MIT",
+  "dependencies": {
+    "@gsap/react": "^2.0.6",
+    "aos": "^2.3.4",
+    "flickity": "^3.0.0",
+    "gsap": "^3.12.2",
+    "jarallax": "^2.2.1",
+    "lenis": "^1.0.34",
+    "sweetalert2": "^11.22.2",
+    "swiper": "^11.0.5",
+    "three": "^0.158.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.19.8",
+    "eslint": "^8.55.0",
+    "imagemin": "^8.0.1",
+    "imagemin-cli": "^7.0.0",
+    "sass": "^1.69.5",
+    "stylelint": "^15.11.0",
+    "webpack-bundle-analyzer": "^4.10.1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cajait/cajait-dev.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cajait/cajait-dev/issues"
+  },
+  "homepage": "https://cajait.com.br"
+}

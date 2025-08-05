@@ -12,20 +12,24 @@ console.log('🚀 Iniciando build otimizado da Cajá...\n');
 // Configurações
 const config = {
   src: {
-    css: 'src/css',
+    styles: 'src/styles',
     js: 'src/js',
-    images: 'src/images',
-    videos: 'src/assets/videos'
+    components: 'src/components',
+    services: 'src/services'
+  },
+  assets: {
+    img: 'assets/img',
+    videos: 'assets/videos',
+    icons: 'assets/icons',
+    fonts: 'assets/fonts'
   },
   public: {
-    css: 'public/css',
-    js: 'public/js',
-    images: 'public/images',
-    videos: 'public/videos'
+    root: 'public',
+    dist: 'dist'
   },
   output: {
-    css: 'public/css/main.min.css',
-    js: 'public/js/main.min.js'
+    css: 'dist/css/main.min.css',
+    js: 'dist/js/main.min.js'
   }
 };
 
@@ -52,9 +56,9 @@ function runCommand(command, description) {
 // Função para consolidar CSS
 function buildCSS() {
   console.log('🎨 Consolidando CSS...');
-  ensureDir(config.public.css);
+  ensureDir('dist/css');
 
-  const mainScssFile = 'src/css/main.scss';
+  const mainScssFile = 'src/styles/main.scss';
 
   if (fs.existsSync(mainScssFile)) {
     console.log('📁 Usando arquivo principal SCSS');
@@ -64,15 +68,15 @@ function buildCSS() {
     console.log('📁 Arquivo principal não encontrado, usando arquivos individuais');
 
     const cssFiles = [
-      'src/css/base/variables.scss',
-      'src/css/base/base.css',
-      'src/css/components/components.css',
-      'src/css/components/video-styles.css',
-      'src/css/animations/ux-libraries.css',
-      'public/fix-layout.css',
-      'public/colabs-inspired.css',
-      'public/firefox-theme.css',
-      'public/style.css'
+      'src/styles/base/variables.scss',
+      'src/styles/base/base.css',
+      'src/styles/components/components.css',
+      'src/styles/components/video-styles.css',
+      'src/styles/animations/ux-libraries.css',
+      'src/styles/fix-layout.css',
+      'src/styles/colabs-inspired.css',
+      'src/styles/firefox-theme.css',
+      'src/styles/style.css'
     ];
 
     const existingFiles = cssFiles.filter(file => fs.existsSync(file));
@@ -96,7 +100,7 @@ function buildCSS() {
 // Função para consolidar JavaScript
 function buildJS() {
   console.log('⚡ Consolidando JavaScript...');
-  ensureDir(config.public.js);
+  ensureDir('dist/js');
 
   try {
     execSync('npx esbuild --version', { stdio: 'ignore' });

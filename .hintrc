@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "development"
+  ],
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "Firefox >= 60",
+    "Chrome >= 60",
+    "Safari >= 12",
+    "Edge >= 79"
+  ],
+  "hints": {
+    "meta-theme-color": "off",
+    "compat-api/css": "warn",
+    "compat-api/html": "warn",
+    "compat-api/next": "warn"
+  }
+}

@@ -3,9 +3,9 @@
 // ===================================
 
 // Importar módulos principais
-import './utils/app.js';
-import './utils/ux-libraries.js';
-import './utils/video-examples.js';
+import './app.js';
+import './ux-libraries.js';
+import './video-examples.js';
 
 // Importar managers
 import './managers/AnimationManager.js';

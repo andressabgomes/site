@@ -1,0 +1,1083 @@
+/* ===================================
+   VIDEO PLAYER STYLES
+   Estilos para o player de vídeo personalizado
+   =================================== */
+
+/* ===================================
+   HERO VIDEO CLIP-PATH EFFECT
+   Efeito de recorte "projetado" para sobreposição
+   =================================== */
+/* Movido para clip-path-effects.css */
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.video-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.video-container video {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #fff;
+}
+
+/* Controles de Vídeo */
+.video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.video-container:hover .video-controls {
+    opacity: 1;
+}
+
+/* Barra de Progresso */
+.video-progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    position: relative;
+}
+
+.video-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #00ccff, #0099cc);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.1s ease;
+    position: relative;
+}
+
+.video-progress::after {
+    content: '';
+    position: absolute;
+    right: -4px;
+    top: -2px;
+    width: 8px;
+    height: 8px;
+    background: #00ccff;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.video-progress-bar:hover .video-progress::after {
+    opacity: 1;
+}
+
+/* Controles Principais */
+.video-controls-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.video-controls-main button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-controls-main button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+.video-controls-main button:active {
+    transform: scale(0.95);
+}
+
+/* Botões de Play/Pause */
+.video-play-btn,
+.video-pause-btn {
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 204, 255, 0.9) !important;
+    border-radius: 50% !important;
+}
+
+.video-play-btn:hover,
+.video-pause-btn:hover {
+    background: rgba(0, 204, 255, 1) !important;
+    box-shadow: 0 4px 12px rgba(0, 204, 255, 0.4);
+}
+
+/* Tempo do Vídeo */
+.video-time {
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.video-current-time,
+.video-duration {
+    min-width: 35px;
+    text-align: center;
+}
+
+/* Botão Fullscreen */
+.video-fullscreen-btn {
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.video-fullscreen-btn:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Fallback para Vídeo */
+.video-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    display: none;
+}
+
+.video-fallback h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.video-fallback p {
+    font-size: 16px;
+    opacity: 0.8;
+}
+
+/* Estados de Loading */
+.video-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 16px;
+    display: none;
+}
+
+.video-container.loading .video-loading {
+    display: block;
+}
+
+/* Overlay de Erro */
+.video-error {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ff4444;
+    text-align: center;
+    padding: 20px;
+    display: none;
+}
+
+.video-container.error .video-error {
+    display: block;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .video-controls {
+        padding: 15px;
+    }
+
+    .video-controls-main {
+        gap: 10px;
+    }
+
+    .video-play-btn,
+    .video-pause-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .video-time {
+        font-size: 12px;
+    }
+
+    .video-fullscreen-btn {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+/* Modo Fullscreen */
+.video-container:fullscreen {
+    border-radius: 0;
+}
+
+.video-container:fullscreen .video-controls {
+    padding: 30px;
+}
+
+/* Animações */
+@keyframes video-pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.video-container.loading .video-loading {
+    animation: video-pulse 1.5s ease-in-out infinite;
+}
+
+/* Variantes de Tamanho */
+.video-container.small {
+    max-width: 400px;
+}
+
+.video-container.medium {
+    max-width: 600px;
+}
+
+.video-container.large {
+    max-width: 800px;
+}
+
+.video-container.full-width {
+    max-width: 100%;
+}
+
+/* Variantes de Posição */
+.video-container.centered {
+    margin: 0 auto;
+}
+
+.video-container.float-left {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.video-container.float-right {
+    float: right;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+/* Efeitos Especiais */
+.video-container.glow {
+    box-shadow: 0 8px 32px rgba(0, 204, 255, 0.3);
+}
+
+.video-container.glow:hover {
+    box-shadow: 0 12px 40px rgba(0, 204, 255, 0.5);
+}
+
+/* Modo Escuro */
+@media (prefers-color-scheme: dark) {
+    .video-container {
+        background: #1a1a1a;
+    }
+
+    .video-controls {
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    }
+}
+
+/* Acessibilidade */
+.video-controls-main button:focus {
+    outline: 2px solid #00ccff;
+    outline-offset: 2px;
+}
+
+.video-progress-bar:focus {
+    outline: 2px solid #00ccff;
+    outline-offset: 2px;
+}
+
+/* Suporte para navegadores antigos */
+@supports not (backdrop-filter: blur(10px)) {
+    .video-controls {
+        background: rgba(0, 0, 0, 0.8);
+    }
+}
+
+/* ===================================
+   VIDEO UPLOAD SECTION
+   Estilos para a seção de upload de vídeo
+   =================================== */
+
+.custom-video-section {
+    margin: 60px 0;
+    text-align: center;
+}
+
+.video-section-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #00ccff, #0099cc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.video-section-description {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Área de Upload */
+.video-placeholder {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border: 3px dashed #00ccff;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.video-placeholder:hover {
+    border-color: #0099cc;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    transform: translateY(-2px);
+}
+
+.video-upload-area {
+    text-align: center;
+    color: #666;
+}
+
+.video-upload-area svg {
+    color: #00ccff;
+    margin-bottom: 20px;
+}
+
+.video-upload-area h4 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.video-upload-area p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.upload-btn {
+    background: linear-gradient(135deg, #00ccff, #0099cc);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 204, 255, 0.3);
+}
+
+.upload-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 204, 255, 0.4);
+}
+
+.upload-btn:active {
+    transform: translateY(0);
+}
+
+/* Instruções */
+.video-instructions {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(0, 204, 255, 0.05);
+    border-radius: 8px;
+    border-left: 4px solid #00ccff;
+}
+
+.video-instructions h4 {
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.video-instructions ul {
+    text-align: left;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.video-instructions li {
+    color: #666;
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.video-instructions li::before {
+    content: '▶';
+    color: #00ccff;
+    position: absolute;
+    left: 0;
+    font-size: 12px;
+}
+
+/* Drag and Drop */
+.video-placeholder.drag-over {
+    border-color: #0099cc;
+    background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+    transform: scale(1.02);
+}
+
+/* Loading State */
+.video-placeholder.loading {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.video-placeholder.loading .video-upload-area {
+    opacity: 0.5;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .video-section-title {
+        font-size: 24px;
+    }
+
+    .video-section-description {
+        font-size: 16px;
+    }
+
+    .video-placeholder {
+        height: 300px;
+    }
+
+    .video-upload-area h4 {
+        font-size: 20px;
+    }
+
+    .video-upload-area p {
+        font-size: 14px;
+    }
+
+    .upload-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+/* ===================================
+   COLAB VIDEO SECTION
+   Estilos específicos para o vídeo Colab
+   =================================== */
+
+.colab-video-section {
+    margin: 80px 0;
+    text-align: center;
+}
+
+.colab-video-section .video-section-title {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.colab-video-section .video-section-description {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+/* Container específico do Colab - Replicando o site original */
+.colab-video-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 0;
+    background: transparent;
+}
+
+/* Vídeo Colab - Replicando o site original */
+.colab-video-element {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: transparent;
+    object-fit: cover;
+    border-radius: 0;
+}
+
+/* Controles específicos do Colab - Removidos para replicar o site original */
+/* O site original não usa controles personalizados */
+
+/* Descrição do Colab */
+.colab-video-description {
+    margin-top: 30px;
+    padding: 25px;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.05), rgba(238, 90, 36, 0.05));
+    border-radius: 12px;
+    border: 1px solid rgba(255, 107, 107, 0.2);
+}
+
+.colab-video-description h4 {
+    color: #333;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.colab-video-description p {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Features do Colab */
+.colab-features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 107, 107, 0.2);
+    transition: all 0.3s ease;
+}
+
+.feature:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2);
+    background: rgba(255, 255, 255, 1);
+}
+
+.feature-icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.feature span:last-child {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Animações específicas do Colab */
+@keyframes colab-pulse {
+    0%, 100% {
+        box-shadow: 0 8px 32px rgba(255, 107, 107, 0.3);
+    }
+    50% {
+        box-shadow: 0 12px 40px rgba(255, 107, 107, 0.6);
+    }
+}
+
+#colab-video-container.loading {
+    animation: colab-pulse 2s ease-in-out infinite;
+}
+
+/* Responsividade do Colab */
+@media (max-width: 768px) {
+    .colab-video-section {
+        margin: 40px 0;
+    }
+
+    .colab-video-description {
+        padding: 20px;
+    }
+
+    .colab-features {
+        gap: 15px;
+    }
+
+    .feature {
+        padding: 12px;
+    }
+
+    .feature-icon {
+        font-size: 20px;
+    }
+
+    .feature span:last-child {
+        font-size: 12px;
+    }
+}
+
+/* ===================================
+   VIDEO NOTIFICATIONS & INFO
+   Estilos para notificações e informações do vídeo
+   =================================== */
+
+/* Notificações */
+.video-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    z-index: 10000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    max-width: 300px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.video-notification.show {
+    transform: translateX(0);
+}
+
+.video-notification.success {
+    background: linear-gradient(135deg, #4caf50, #45a049);
+}
+
+.video-notification.error {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+}
+
+/* Informações do Vídeo */
+.video-info-overlay {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    transform: translateY(-100%);
+    animation: slideDown 0.5s ease forwards;
+}
+
+.video-info h4 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #00ccff;
+}
+
+.video-info p {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* Botão Remover */
+.video-remove-btn {
+    width: 32px;
+    height: 32px;
+    background: rgba(244, 67, 54, 0.8) !important;
+    border-radius: 50% !important;
+}
+
+.video-remove-btn:hover {
+    background: rgba(244, 67, 54, 1) !important;
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.4);
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    margin-bottom: 20px;
+}
+
+.loading-spinner svg {
+    color: #00ccff;
+}
+
+/* Animações */
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+/* ===================================
+   HERO VIDEO STYLES
+   Estilos para o vídeo de fundo do hero
+   =================================== */
+
+.video-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff !important;
+}
+
+/* Forçar exibição do vídeo com clip-path chanfrado */
+.video-hero .video-container {
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 10 !important;
+    overflow: visible !important;
+}
+
+.video-hero .hero-video {
+    position: relative !important;
+    width: 100% !important;
+    height: 60vh !important;
+    overflow: visible !important;
+    z-index: 10 !important;
+    /* Recorte "chanfrado" na base - efeito CoLabs */
+    clip-path: polygon(
+        0%   0%,    /* canto superior esquerdo */
+        100% 0%,    /* canto superior direito */
+        100% 80%,   /* desce até 80% no lado direito */
+        90%  100%,  /* vai até 100% um pouco antes do canto direito */
+        0%   100%   /* canto inferior esquerdo */
+    ) !important;
+}
+
+.video-hero .hero-video video {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: auto !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    background: #fff !important;
+}
+
+/* Removido - usando versão replicando CoLabs */
+
+/* Garantir que outras seções também fiquem atrás do vídeo */
+.principles,
+.about,
+.contact {
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+/* Forçar overflow visible em todos os ancestrais */
+.video-hero,
+.video-hero *,
+.hero,
+.hero * {
+    overflow: visible !important;
+}
+
+.video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.video-container .hero-video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    background: #000 !important;
+    display: block !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4) !important;
+    z-index: 2;
+}
+
+/* Sobrescrever qualquer overlay branco */
+.video-hero .video-overlay {
+    background: rgba(0, 0, 0, 0.4) !important;
+}
+
+.video-container .video-overlay {
+    background: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Conteúdo do Hero sobre o vídeo */
+.video-hero .hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    color: white;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.video-hero .hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.video-hero .hero-title-highlight {
+    background: linear-gradient(135deg, #00ccff, #0099cc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+}
+
+.video-hero .hero-description {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Indicador de scroll */
+.video-hero .scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    text-align: center;
+    color: white;
+}
+
+.video-hero .scroll-arrow {
+    width: 30px;
+    height: 30px;
+    border: 2px solid white;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+    margin: 0 auto 10px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) rotate(45deg) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) rotate(45deg) translateY(-10px);
+    }
+    60% {
+        transform: translateX(-50%) rotate(45deg) translateY(-5px);
+    }
+}
+
+.video-hero .scroll-text {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .video-hero {
+        height: 70vh;
+        min-height: 500px;
+    }
+
+    .video-hero .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .video-hero .hero-description {
+        font-size: 1rem;
+    }
+}
+
+/* ===================================
+   HERO VIDEO WRAPPER COM CLIP-PATH
+   Implementação robusta do efeito chanfrado
+   =================================== */
+
+.hero-video-wrapper {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 90% 100%, 0% 100%);
+    overflow: visible;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    height: 60vh;
+    background-image: url('../images/hero-bg.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Forçar fundo branco em todos os elementos do hero */
+.video-hero,
+.video-hero *,
+.hero,
+.hero * {
+    background-color: #fff !important;
+}
+
+.hero-video-wrapper .hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Fazer a próxima seção "subir" por baixo do clip-path - Replicando CoLabs */
+.services {
+    margin-top: -5rem;
+    position: relative;
+    z-index: 5;
+    background-color: #fff;
+}
+
+/* Garantir que outras seções também fiquem atrás do vídeo */
+.principles,
+.about,
+.contact {
+    position: relative;
+    z-index: 5;
+}
+
+/* Responsividade para o wrapper */
+@media (max-width: 768px) {
+    .hero-video-wrapper {
+        height: 50vh;
+        clip-path: polygon(
+            0%   0%,
+            100% 0%,
+            100% 85%,
+            95%  100%,
+            0%   100%
+        );
+    }
+
+    .services {
+        margin-top: -3rem;
+        padding-top: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-video-wrapper {
+        height: 40vh;
+        clip-path: polygon(
+            0%   0%,
+            100% 0%,
+            100% 90%,
+            98%  100%,
+            0%   100%
+        );
+    }
+
+    .services {
+        margin-top: -2rem;
+        padding-top: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-hero {
+        height: 60vh;
+        min-height: 400px;
+    }
+
+    .video-hero .hero-title {
+        font-size: 2rem;
+    }
+
+    .video-hero .hero-description {
+        font-size: 0.9rem;
+    }
+}

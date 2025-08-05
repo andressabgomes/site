@@ -1,0 +1,97 @@
+/* ===================================
+   THEME SUPPORT CSS
+   Compatibilidade entre navegadores para cores de tema
+   =================================== */
+
+/* Suporte para Firefox e navegadores que não suportam meta theme-color */
+@supports not (color-scheme: dark light) {
+    :root {
+        --theme-color: #000000;
+    }
+}
+
+/* Suporte para navegadores modernos com color-scheme */
+@supports (color-scheme: dark light) {
+    :root {
+        color-scheme: dark light;
+    }
+}
+
+/* Fallback para Firefox mobile e outros navegadores */
+@media (max-width: 768px) {
+    :root {
+        --firefox-theme-color: #000000;
+    }
+}
+
+/* Suporte para modo escuro/claro */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --theme-color: #000000;
+        --background-color: #000000;
+        --text-color: #ffffff;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --theme-color: #000000;
+        --background-color: #ffffff;
+        --text-color: #000000;
+    }
+}
+
+/* Aplicação das variáveis CSS para compatibilidade */
+body {
+    background-color: var(--background-color, #ffffff);
+    color: var(--text-color, #000000);
+}
+
+/* Suporte específico para Firefox usando @supports */
+@supports (-moz-appearance: none) {
+    :root {
+        --firefox-theme-color: #000000;
+    }
+}
+
+/* ===================================
+   SOLUÇÃO COMPLEMENTAR PARA NAVEGADORES SEM THEME-COLOR
+   =================================== */
+
+/* Suporte para navegadores que não suportam meta theme-color */
+html.no-theme-color-support {
+    color-scheme: dark light;
+}
+
+html.no-theme-color-support :root {
+    --alternative-theme-color: #000000;
+    --alternative-background: #000000;
+}
+
+html.no-theme-color-support body {
+    background-color: var(--alternative-background, #000000);
+}
+
+/* Suporte para modo escuro em navegadores sem theme-color */
+html.no-theme-color-support @media (prefers-color-scheme: dark) {
+    :root {
+        --dark-theme-color: #000000;
+        --dark-background: #000000;
+    }
+
+    body {
+        background-color: var(--dark-background, #000000);
+    }
+}
+
+/* Suporte para modo claro em navegadores sem theme-color */
+html.no-theme-color-support @media (prefers-color-scheme: light) {
+    :root {
+        --light-theme-color: #000000;
+        --light-background: #ffffff;
+    }
+
+    body {
+        background-color: var(--light-background, #ffffff);
+    }
+}

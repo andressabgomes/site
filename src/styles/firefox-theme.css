@@ -1,0 +1,225 @@
+/* ===================================
+   FIREFOX THEME COLOR SUPPORT
+   Compatibilidade específica para Firefox
+   Solução para o erro: 'meta[name=theme-color]' não suportado pelo Firefox
+   =================================== */
+
+/* Firefox Theme Color Support - Solução CSS para substituir meta theme-color */
+@-moz-document url-prefix() {
+    :root {
+        color-scheme: dark light;
+        --firefox-theme-color: #000000;
+        --firefox-background: #000000;
+        --firefox-accent: #000000;
+        --firefox-status-bar: #000000;
+    }
+
+    /* Firefox specific theme color - substitui meta theme-color */
+    html {
+        background-color: var(--firefox-background, #000000);
+        color-scheme: dark light;
+    }
+
+    body {
+        background-color: var(--firefox-background, #000000);
+    }
+
+    /* Firefox mobile theme color support */
+    @media (max-width: 768px) {
+        html, body {
+            background-color: var(--firefox-background, #000000);
+        }
+    }
+
+    /* Firefox PWA theme color */
+    @media (display-mode: standalone) {
+        html, body {
+            background-color: var(--firefox-background, #000000);
+        }
+    }
+
+    /* Firefox for Android specific */
+    @media (max-width: 768px) {
+        html, body {
+            background-color: var(--firefox-background, #000000) !important;
+        }
+    }
+
+    /* Firefox status bar color (mobile) */
+    @media (max-width: 480px) {
+        :root {
+            --firefox-mobile-theme: #000000;
+        }
+
+        html, body {
+            background-color: var(--firefox-mobile-theme, #000000);
+        }
+    }
+}
+
+/* Suporte adicional para Firefox Mobile */
+@-moz-document url-prefix() {
+    @media (max-width: 480px) {
+        :root {
+            --firefox-mobile-theme: #000000;
+        }
+
+        html, body {
+            background-color: var(--firefox-mobile-theme, #000000);
+        }
+    }
+}
+
+/* Suporte para Firefox Desktop */
+@-moz-document url-prefix() {
+    @media (min-width: 769px) {
+        :root {
+            --firefox-desktop-theme: #000000;
+        }
+
+        html, body {
+            background-color: var(--firefox-desktop-theme, #000000);
+        }
+    }
+}
+
+/* Fallback para navegadores que não suportam @-moz-document */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --fallback-theme-color: #000000;
+    }
+
+    html, body {
+        background-color: var(--fallback-theme-color, #000000);
+    }
+}
+
+/* Suporte para modo claro */
+@media (prefers-color-scheme: light) {
+    :root {
+        --fallback-theme-color: #000000;
+    }
+
+    html, body {
+        background-color: var(--fallback-theme-color, #000000);
+    }
+}
+
+/* ===================================
+   SOLUÇÃO ALTERNATIVA PARA FIREFOX
+   Usando CSS custom properties para simular theme-color
+   =================================== */
+
+/* Aplicação global de tema para Firefox */
+@supports (-moz-appearance: none) {
+    :root {
+        --theme-color: #000000;
+        --theme-background: #000000;
+        --theme-accent: #000000;
+    }
+
+    html {
+        background-color: var(--theme-background);
+        color-scheme: dark light;
+    }
+
+    body {
+        background-color: var(--theme-background);
+    }
+
+    /* Status bar simulation para Firefox mobile */
+    @media (max-width: 768px) {
+        html::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: env(safe-area-inset-top, 0px);
+            background-color: var(--theme-color);
+            z-index: 9999;
+        }
+    }
+}
+
+/* ===================================
+   COMPATIBILIDADE COM OPERA
+   Opera também não suporta meta[name=theme-color]
+   =================================== */
+
+/* Opera detection and theme support */
+@supports (-o-appearance: none) {
+    :root {
+        --opera-theme-color: #000000;
+        --opera-background: #000000;
+    }
+
+    html, body {
+        background-color: var(--opera-background);
+    }
+}
+
+/* ===================================
+   SOLUÇÃO UNIVERSAL PARA NAVEGADORES SEM SUPORTE A THEME-COLOR
+   Aplicada via JavaScript quando detecta Firefox/Opera
+   =================================== */
+
+/* Classe adicionada via JavaScript para navegadores sem suporte */
+html.no-theme-color-support {
+    color-scheme: dark light;
+}
+
+html.no-theme-color-support :root {
+    --fallback-theme-color: #000000;
+    --fallback-background: #000000;
+    --fallback-accent: #000000;
+}
+
+html.no-theme-color-support body {
+    background-color: var(--fallback-background, #000000);
+}
+
+/* Suporte para mobile em navegadores sem theme-color */
+html.no-theme-color-support @media (max-width: 768px) {
+    :root {
+        --mobile-theme-color: #000000;
+    }
+
+    html, body {
+        background-color: var(--mobile-theme-color, #000000);
+    }
+}
+
+/* Suporte para PWA em navegadores sem theme-color */
+html.no-theme-color-support @media (display-mode: standalone) {
+    :root {
+        --pwa-theme-color: #000000;
+    }
+
+    html, body {
+        background-color: var(--pwa-theme-color, #000000);
+    }
+}
+
+/* ===================================
+   DETECÇÃO ADICIONAL DE NAVEGADORES
+   Usando @supports para detectar capacidades específicas
+   =================================== */
+
+/* Navegadores que não suportam color-scheme */
+@supports not (color-scheme: dark light) {
+    :root {
+        --legacy-theme-color: #000000;
+    }
+
+    html, body {
+        background-color: var(--legacy-theme-color, #000000);
+    }
+}
+
+/* Navegadores que não suportam CSS custom properties */
+@supports not (--custom-property: value) {
+    html, body {
+        background-color: #000000;
+    }
+}

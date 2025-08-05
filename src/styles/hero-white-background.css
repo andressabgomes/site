@@ -1,0 +1,82 @@
+/* ===================================
+   HERO WHITE BACKGROUND
+   Garante que o fundo seja branco por trás do vídeo
+   =================================== */
+
+/* Garante que o hero tenha fundo branco */
+.hero {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+}
+
+/* Garante que o wrapper do vídeo tenha fundo branco */
+.hero-video-fullbleed {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+}
+
+/* Garante que o container do conteúdo tenha fundo branco */
+.hero-content-container {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+}
+
+/* Garante que o body tenha fundo branco */
+body {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+}
+
+/* Garante que o html tenha fundo branco */
+html {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+}
+
+/* ===================================
+   RESPONSIVIDADE
+   =================================== */
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .hero,
+    .hero-video-fullbleed,
+    .hero-content-container {
+        background: #ffffff !important;
+        background-color: #ffffff !important;
+    }
+}
+
+/* Tablet */
+@media (max-width: 1023px) and (min-width: 768px) {
+    .hero,
+    .hero-video-fullbleed,
+    .hero-content-container {
+        background: #ffffff !important;
+        background-color: #ffffff !important;
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .hero,
+    .hero-video-fullbleed,
+    .hero-content-container {
+        background: #ffffff !important;
+        background-color: #ffffff !important;
+    }
+}
+
+/* ===================================
+   FALLBACK PARA NAVEGADORES ANTIGOS
+   =================================== */
+
+/* Fallback para navegadores sem suporte a !important */
+@supports not (background: #ffffff !important) {
+    .hero,
+    .hero-video-fullbleed,
+    .hero-content-container {
+        background: #ffffff;
+        background-color: #ffffff;
+    }
+}

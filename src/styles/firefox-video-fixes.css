@@ -1,0 +1,92 @@
+/**
+ * Firefox Video Fixes
+ * Correções específicas para compatibilidade de vídeo no Firefox
+ */
+
+/* Firefox específico - garante que vídeos sejam reproduzidos inline */
+@-moz-document url-prefix() {
+    .hero-video {
+        position: relative !important;
+        z-index: 1 !important;
+        object-fit: cover !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    /* Garante que vídeos autoplay funcionem no Firefox */
+    video[autoplay] {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Fallback para vídeos que não conseguem autoplay */
+    .hero-video-fallback {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+        z-index: 0;
+    }
+
+    /* Mostra fallback apenas quando vídeo falha */
+    .hero-video-container:not(.video-loaded) .hero-video-fallback {
+        display: flex;
+    }
+
+    .hero-video-container.video-loaded .hero-video-fallback {
+        display: none;
+    }
+}
+
+/* Estilos gerais para compatibilidade de vídeo */
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* Container para vídeo com fallback */
+.hero-video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Fallback para navegadores sem suporte a vídeo */
+.hero-video-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    z-index: 0;
+}
+
+/* Mostra fallback quando vídeo não carrega */
+.hero-video-container.video-error .hero-video-fallback {
+    display: flex;
+}
+
+.hero-video-container.video-error .hero-video {
+    display: none;
+}

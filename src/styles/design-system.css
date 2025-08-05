@@ -1,0 +1,329 @@
+/* =============================================================================
+   DESIGN SYSTEM COMPONENTS - Cajá IT
+   ============================================================================= */
+
+/* =============================================================================
+   LAYOUT WRAPPERS
+   ============================================================================= */
+
+.page-wrapper {
+  min-height: 100vh;
+  background-color: var(--color-bg-light);
+  font-family: var(--font-family-primary);
+  color: var(--color-text-primary);
+}
+
+.page-wrapper.home {
+  background-color: var(--color-bg-white);
+}
+
+/* =============================================================================
+   HEADER COMPONENT
+   ============================================================================= */
+
+.Header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-header);
+  background-color: var(--color-bg-white);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-menu-border);
+  transition: var(--transition-normal);
+}
+
+.Header.scrolled {
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.HeaderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-header-padding);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* =============================================================================
+   PROGRESS BAR COMPONENT
+   ============================================================================= */
+
+.ProgressBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-progress-bar-background);
+  z-index: var(--z-progress-bar);
+}
+
+.BarFill {
+  height: 100%;
+  background-color: var(--color-progress-bar-fill);
+  width: 0%;
+  transition: width var(--transition-fast);
+}
+
+/* =============================================================================
+   LOGO COMPONENT
+   ============================================================================= */
+
+.Logo {
+  display: flex;
+  align-items: center;
+  font-weight: var(--font-weight-bold);
+  font-size: 1.5rem;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.Logo:hover {
+  opacity: 0.8;
+}
+
+.Logo img {
+  height: 32px;
+  width: auto;
+  margin-right: 0.5rem;
+}
+
+/* =============================================================================
+   MENU BUTTON COMPONENT
+   ============================================================================= */
+
+.MenuButton {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: var(--z-menu);
+}
+
+.MenuButton span {
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-text-primary);
+  transition: var(--transition-fast);
+  transform-origin: center;
+}
+
+.MenuButton.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.MenuButton.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.MenuButton.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* =============================================================================
+   NAVIGATION MENU COMPONENT
+   ============================================================================= */
+
+.NavigationMenu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.NavItem {
+  position: relative;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  padding: var(--spacing-menu-padding);
+  border-radius: 8px;
+  transition: var(--transition-fast);
+}
+
+.NavItem:hover {
+  background-color: var(--color-menu-hover);
+  color: var(--color-text-primary);
+}
+
+.NavItem.active {
+  background-color: var(--color-menu-hover);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* =============================================================================
+   SOCIAL LINKS COMPONENT
+   ============================================================================= */
+
+.SocialLinks {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.SocialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--color-bg-dark);
+  color: var(--color-icon-fill);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.SocialLink:hover {
+  background-color: var(--color-social-hover);
+  transform: translateY(-2px);
+}
+
+.SocialLink svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* =============================================================================
+   SEARCH INPUT COMPONENT
+   ============================================================================= */
+
+.SearchInput {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.SearchInput input {
+  width: 200px;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border: 1px solid var(--color-search-border);
+  border-radius: 8px;
+  background-color: var(--color-search-background);
+  color: var(--color-text-white);
+  font-family: var(--font-family-primary);
+  font-size: 0.875rem;
+  transition: var(--transition-fast);
+}
+
+.SearchInput input::placeholder {
+  color: var(--color-search-placeholder);
+}
+
+.SearchInput input:focus {
+  outline: none;
+  border-color: var(--color-icon-fill);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.SearchInput svg {
+  position: absolute;
+  left: 0.75rem;
+  width: 16px;
+  height: 16px;
+  fill: var(--color-search-placeholder);
+  pointer-events: none;
+}
+
+/* =============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================= */
+
+@media (max-width: 768px) {
+  .HeaderContainer {
+    padding: 1rem;
+  }
+
+  .MenuButton {
+    display: flex;
+  }
+
+  .NavigationMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-menu-background);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    transform: translateX(-100%);
+    transition: var(--transition-normal);
+    z-index: var(--z-overlay);
+  }
+
+  .NavigationMenu.active {
+    transform: translateX(0);
+  }
+
+  .NavItem {
+    font-size: 1.25rem;
+    padding: var(--spacing-submenu-padding);
+  }
+
+  .SocialLinks {
+    display: none;
+  }
+
+  .SearchInput {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .HeaderContainer {
+    padding: 0.75rem;
+  }
+
+  .Logo {
+    font-size: 1.25rem;
+  }
+
+  .Logo img {
+    height: 28px;
+  }
+}
+
+/* =============================================================================
+   ANIMAÇÕES E TRANSITIONS
+   ============================================================================= */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn var(--transition-normal) ease-out;
+}
+
+.slide-in {
+  animation: slideIn var(--transition-normal) ease-out;
+}

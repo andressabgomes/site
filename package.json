@@ -1,6 +1,6 @@
 {
   "name": "cajait-dev",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Cajá IT - Plataforma de desenvolvimento e inovação tecnológica",
   "main": "public/index.html",
   "scripts": {
@@ -16,6 +16,7 @@
     "test": "echo \"No tests specified\" && exit 0",
     "lint": "eslint src/js/",
     "lint:css": "stylelint src/css/",
+    "lint:webhint": "hint public/",
     "clean": "rm -rf public/css public/js public/images dist",
     "clean:all": "rm -rf public/css public/js public/images dist node_modules package-lock.json",
     "serve": "npm run build && npm run dev",
@@ -51,6 +52,7 @@
   "devDependencies": {
     "esbuild": "^0.19.8",
     "eslint": "^8.55.0",
+    "hint": "^7.4.0",
     "imagemin": "^8.0.1",
     "imagemin-cli": "^7.0.0",
     "sass": "^1.69.5",

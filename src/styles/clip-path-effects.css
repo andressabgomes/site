@@ -1,0 +1,174 @@
+/* ===================================
+   CLIP-PATH EFFECTS
+   Efeitos de recorte para sobreposição de elementos
+   =================================== */
+
+/* ===================================
+   HERO VIDEO FULL-BLEED COM CORTE CHANFRADO
+   Implementação idêntica ao CoLabs com fundo branco
+   =================================== */
+
+/* ===================================
+   WRAPPER FULL-BLEED
+   Escapa do container central e ocupa toda a largura do viewport
+   =================================== */
+
+.hero-video-fullbleed {
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    width: 100vw;
+    height: 60vh;              /* ajuste conforme design */
+    overflow: visible;         /* permitir "vazamento" do vídeo */
+    background-color: #fff;    /* fundo branco por trás do vídeo */
+    z-index: 10;
+}
+
+/* ===================================
+   CORTE CHANFRADO (CLIP-PATH)
+   Aplicado no mesmo wrapper
+   =================================== */
+
+.hero-video-fullbleed {
+    clip-path: polygon(
+        0%   0%,
+        100% 0%,
+        100% 90%,
+        90%  100%,
+        0%   100%
+    );
+}
+
+/* ===================================
+   VÍDEO FULL-COVER
+   Centralizado e preenche o container sem distorcer
+   =================================== */
+
+.hero-video-fullbleed .hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ===================================
+   SEÇÃO SEGUINTE POR BAIXO
+   Próximo bloco "sobe" por baixo do corte
+   =================================== */
+
+.next-section {
+    position: relative;
+    z-index: 5;            /* abaixo do vídeo */
+    margin-top: -5rem;     /* ajuste fino necessário */
+    padding-top: 5rem;     /* repõe espaçamento interno */
+    background-color: #fff;/* garante fundo branco */
+}
+
+/* Compatibilidade com a classe services existente */
+.services {
+    position: relative;
+    z-index: 5;
+    margin-top: -5rem;
+    padding-top: 5rem;
+    background-color: #fff;
+}
+
+/* ===================================
+   RESPONSIVIDADE
+   =================================== */
+
+/* Tablet */
+@media (max-width: 768px) {
+    .hero-video-fullbleed {
+        height: 50vh;
+        clip-path: polygon(
+            0%   0%,
+            100% 0%,
+            100% 85%,
+            85%  100%,
+            0%   100%
+        );
+    }
+
+    .next-section,
+    .services {
+        margin-top: -4rem;
+        padding-top: 4rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .hero-video-fullbleed {
+        height: 40vh;
+        clip-path: polygon(
+            0%   0%,
+            100% 0%,
+            100% 80%,
+            80%  100%,
+            0%   100%
+        );
+    }
+
+    .next-section,
+    .services {
+        margin-top: -3rem;
+        padding-top: 3rem;
+    }
+}
+
+/* ===================================
+   ANIMAÇÕES E EFEITOS
+   =================================== */
+
+/* Animação suave para o clip-path */
+.hero-video-fullbleed {
+    transition: clip-path 0.3s ease-in-out;
+}
+
+/* Efeito hover sutil no vídeo */
+.hero-video-fullbleed .hero-video:hover {
+    transform: translate(-50%, -50%) scale(1.02);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* ===================================
+   FALLBACK PARA NAVEGADORES SEM SUPORTE
+   =================================== */
+
+@supports not (clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 90% 100%, 0% 100%)) {
+    .hero-video-fullbleed {
+        clip-path: none;
+        border-radius: 0 0 20px 20px;
+    }
+
+    .services {
+        margin-top: 0;
+    }
+}
+
+/* ===================================
+   COMPATIBILIDADE COM CONTAINER
+   =================================== */
+
+/* Garante que o vídeo rompa o container mas mantenha o conteúdo centralizado */
+.container {
+    position: relative;
+    z-index: 3;
+}
+
+/* Ajuste para o conteúdo não ser afetado pelo full-bleed */
+.hero-content-container .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+@media (max-width: 768px) {
+    .hero-content-container .container {
+        padding: 0 1rem;
+    }
+}

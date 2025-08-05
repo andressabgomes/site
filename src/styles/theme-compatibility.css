@@ -1,0 +1,73 @@
+/*
+ * Theme Compatibility CSS
+ * Fornece estilos alternativos para navegadores sem suporte a theme-color
+ * (Firefox, Opera, etc.)
+ */
+
+/* Classe aplicada via JavaScript para navegadores sem suporte a theme-color */
+.no-theme-color-support {
+    /* Garante que o fundo seja consistente */
+    background-color: #000000;
+}
+
+/* Estilos específicos para Firefox e Opera */
+@supports not (color-scheme: dark light) {
+    body {
+        background-color: #000000;
+    }
+
+    /* Garante que a barra de status seja escura em dispositivos móveis */
+    @media (max-width: 768px) {
+        html {
+            background-color: #000000;
+        }
+    }
+}
+
+/* Fallback para navegadores que não suportam prefers-color-scheme */
+@media (prefers-color-scheme: no-preference) {
+    .no-theme-color-support {
+        background-color: #000000;
+    }
+}
+
+/* Estilos específicos para Firefox */
+@-moz-document url-prefix() {
+    html {
+        background-color: #000000;
+    }
+
+    body {
+        background-color: #000000;
+    }
+}
+
+/* Estilos específicos para Opera */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    /* Opera usa WebKit, mas pode não suportar theme-color */
+    .no-theme-color-support {
+        background-color: #000000;
+    }
+}
+
+/* Garante que o PWA tenha aparência consistente */
+@media (display-mode: standalone) {
+    .no-theme-color-support {
+        background-color: #000000;
+    }
+}
+
+/* Estilos para dispositivos móveis sem suporte a theme-color */
+@media (max-width: 768px) {
+    .no-theme-color-support {
+        /* Garante que a barra de status seja escura */
+        background-color: #000000;
+    }
+
+    /* Para iOS Safari */
+    @supports (-webkit-touch-callout: none) {
+        .no-theme-color-support {
+            background-color: #000000;
+        }
+    }
+}

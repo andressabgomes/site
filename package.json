@@ -45,16 +45,18 @@
     "gsap": "^3.12.2",
     "jarallax": "^2.2.1",
     "lenis": "^1.0.34",
-    "sweetalert2": "^11.22.2",
+    "sweetalert2": "^11.6.13",
     "swiper": "^11.0.5",
     "three": "^0.158.0"
   },
   "devDependencies": {
-    "esbuild": "^0.19.8",
+    "esbuild": "^0.25.8",
     "eslint": "^8.55.0",
-    "hint": "^7.4.0",
     "imagemin": "^8.0.1",
-    "imagemin-cli": "^7.0.0",
+    "imagemin-cli": "^8.0.0",
+    "imagemin-gifsicle": "^5.2.0",
+    "imagemin-jpegtran": "^5.0.2",
+    "imagemin-pngquant": "^5.0.1",
     "sass": "^1.69.5",
     "stylelint": "^15.11.0",
     "webpack-bundle-analyzer": "^4.10.1"

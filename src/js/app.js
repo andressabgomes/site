@@ -3,13 +3,12 @@
  * Aplicação principal refatorada
  */
 
-// Importar componentes
-import MobileMenu from '../../components/MobileMenu.js';
-import ContactForm from '../../components/ContactForm.js';
+import MobileMenu from '../components/MobileMenu.js';
+import ContactForm from '../components/ContactForm.js';
 
 // Importar utilitários
-import SmoothScroll from '../../utils/SmoothScroll.js';
-import ScrollManager from '../../utils/ScrollManager.js';
+import SmoothScroll from './SmoothScroll.js';
+import ScrollManager from "./ScrollManager.js";
 
 /**
  * Classe principal da aplicação

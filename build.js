@@ -25,7 +25,9 @@ const config = {
   },
   public: {
     root: 'public',
-    dist: 'dist'
+    dist: 'dist',
+    images: 'public/images',
+    videos: 'public/videos'
   },
   output: {
     css: 'dist/css/main.min.css',
@@ -125,8 +127,8 @@ function optimizeImages() {
     runCommand('npm install --save-dev imagemin imagemin-cli', 'Instalação do imagemin');
   }
 
-  if (fs.existsSync(config.src.images)) {
-    const imageminCommand = `npx imagemin ${config.src.images}/* --out-dir=${config.public.images}`;
+  if (fs.existsSync(config.assets.img)) {
+    const imageminCommand = `npx imagemin ${config.assets.img}/* --out-dir=${config.public.images} --use=imagemin-gifsicle --use=imagemin-jpegtran`;
     runCommand(imageminCommand, 'Otimização de imagens');
   } else {
     console.log('⚠️  Diretório de imagens não encontrado');
@@ -138,8 +140,8 @@ function copyVideos() {
   console.log('🎥 Copiando vídeos...');
   ensureDir(config.public.videos);
 
-  if (fs.existsSync(config.src.videos)) {
-    const copyCommand = `cp -r ${config.src.videos}/* ${config.public.videos}/`;
+  if (fs.existsSync(config.assets.videos)) {
+    const copyCommand = `cp -r ${config.assets.videos}/* ${config.public.videos}/`;
     runCommand(copyCommand, 'Cópia de vídeos');
   } else {
     console.log('⚠️  Diretório de vídeos não encontrado');
@@ -225,6 +227,7 @@ function main() {
     buildJS();
     optimizeImages();
     copyVideos();
+    copyStaticFiles();
     generateConfigFiles();
 
     if (validateBuild()) {
@@ -256,3 +259,39 @@ module.exports = {
   validateBuild,
   generateBuildReport
 };
+
+
+// Função para copiar arquivos estáticos
+function copyStaticFiles() {
+  console.log("📄 Copiando arquivos estáticos...");
+  const staticFiles = [
+    { src: 'index.html', dest: 'public/index.html' },
+    { src: 'manifest.json', dest: 'public/manifest.json' },
+    { src: 'src/js/sw.js', dest: 'public/sw.js' },
+    { src: 'robots.txt', dest: 'public/robots.txt' },
+    { src: 'sitemap.xml', dest: 'public/sitemap.xml' },
+    { src: '.htaccess', dest: 'public/.htaccess' }
+  ];
+
+  staticFiles.forEach(file => {
+    if (fs.existsSync(file.src)) {
+      runCommand(`cp ${file.src} ${file.dest}`, `Copiando ${file.src}`);
+    } else {
+      console.log(`⚠️  Arquivo estático não encontrado: ${file.src}`);
+      // Criar arquivos vazios se não existirem para evitar falha no build
+      if (file.src === 'robots.txt') {
+        fs.writeFileSync('public/robots.txt', 'User-agent: *\nDisallow:');
+        console.log('✅ robots.txt criado.');
+      } else if (file.src === 'sitemap.xml') {
+        fs.writeFileSync('public/sitemap.xml', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>');
+        console.log('✅ sitemap.xml criado.');
+      } else if (file.src === '.htaccess') {
+        fs.writeFileSync('public/.htaccess', '');
+        console.log('✅ .htaccess criado.');
+      }
+    }
+  });
+  console.log("✅ Arquivos estáticos copiados.\n");
+}
+
+

@@ -177,8 +177,6 @@ function validateBuild() {
   const requiredFiles = [
     config.output.css,
     config.output.js,
-    'public/index.html',
-    'public/manifest.json',
     'public/sw.js',
     'public/.htaccess',
     'public/robots.txt',
@@ -265,8 +263,6 @@ module.exports = {
 function copyStaticFiles() {
   console.log("📄 Copiando arquivos estáticos...");
   const staticFiles = [
-    { src: 'index.html', dest: 'public/index.html' },
-    { src: 'manifest.json', dest: 'public/manifest.json' },
     { src: 'src/js/sw.js', dest: 'public/sw.js' },
     { src: 'robots.txt', dest: 'public/robots.txt' },
     { src: 'sitemap.xml', dest: 'public/sitemap.xml' },
